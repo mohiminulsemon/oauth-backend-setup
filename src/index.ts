@@ -15,10 +15,15 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-mongoose
-  .connect(process.env.MONGODB_URI as string)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err: any) => console.error('MongoDB connection error:', err));
+async function main() {
+  try{
+      await mongoose.connect(process.env.DATABASE_URL as string);
+  }
+  catch(err){
+      console.log(err);
+  }
+  
+}
 
 // Define the User Interface
 interface IUser extends Document {
